@@ -4,7 +4,7 @@
 
 ## Installation
 
-You can install **PriceFormatter** via your favorite package manager:
+You can install via your favorite package manager:
 
 ```bash
 npm install pricify
