@@ -1,0 +1,33 @@
+{
+  "name": "pricify",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "playground": "vite-node ./playgrounds/index.ts",
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "test": "echo 'Test skipped...'"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.2.2",
+    "@types/node": "^22.10.1",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.1",
+    "vite-node": "^2.1.8",
+    "vite-plugin-dts": "^4.3.0"
+  },
+  "dependencies": {
+    "big.js": "^6.2.2"
+  }
+}
