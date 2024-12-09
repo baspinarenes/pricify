@@ -1,6 +1,6 @@
 # :moneybag: Pricify
 
-**Pricify** is a lightweight, flexible JavaScript library for formatting prices in different currencies and customizing price templates. It is designed to handle various formatting needs such as currency formatting, rounding, and template-based formatting with ease.
+A lightweight, flexible JavaScript library for formatting prices in different currencies and customizing price templates.
 
 ## Installation
 
@@ -242,10 +242,12 @@ Formats the provided `amount` or `Price` according to the formatter's options.
 Here’s a complete example of using:
 
 ```typescript custom-formatter.ts
+// custom-formatter.ts
+
 import { PriceFormatter } from "pricify";
 
 export const formatter = new PriceFormatter({
-  location: process.env.COUNTRY_CODE || "TR",
+  location: process.env.FORCED_SINGLE_LOCATION ? "TR" : process.env.LOCATION,
   overridedSymbols: {
     TR: "TL",
     AZN: "TL",
@@ -256,6 +258,8 @@ export const formatter = new PriceFormatter({
 ```
 
 ```typescript index.ts
+// index.ts
+
 import { formatter } from "./custom-formatter";
 
 type Prices = {
@@ -266,9 +270,11 @@ type Prices = {
 
 const mapPrices = (price: Prices) => {
   return {
+    unitInfo: {
+      price: formatter.formatToParts(price.originalPrice),
+    },
+    originalPrice: price.originalPrice,
     originaPriceText: formatter.format(price.originalPrice),
-    discountedPriceText: formatter.format(price.discountedPrice),
-    sellingPriceText: formatter.format(price.sellingPrice),
   };
 };
 
@@ -282,9 +288,15 @@ console.log(mappedPrices);
 
 /* Output: 
 {
-  originaPriceText: '167,43 TL',
-  discountedPriceText: '150,20 TL',
-  sellingPriceText: '130 TL'
+  unitInfo: {
+    price: {
+      value: 167.43,
+      currency: 'TL',
+      formatted: '167,43',
+      display: '167,43 TL'
+    }
+  },
+  originaPriceText: '167,43 TL'
 }
 */
 ```

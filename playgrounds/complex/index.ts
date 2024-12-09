@@ -8,14 +8,16 @@ type Prices = {
 
 const mapPrices = (price: Prices) => {
   return {
+    unitInfo: {
+      price: formatter.formatToParts(price.originalPrice),
+    },
+    originalPrice: price.originalPrice,
     originaPriceText: formatter.format(price.originalPrice),
-    discountedPriceText: formatter.format(price.discountedPrice),
-    sellingPriceText: formatter.format(price.sellingPrice),
   };
 };
 
 const mappedPrices = mapPrices({
-  originalPrice: 0,
+  originalPrice: 167.434,
   discountedPrice: 150.2,
   sellingPrice: 130,
 });
