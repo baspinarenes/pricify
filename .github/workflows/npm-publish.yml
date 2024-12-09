@@ -12,19 +12,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: yarn install
-      - run: yarn test
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: yarn install
-      - run: yarn publish --non-interactive --access public
+      - name: install dependencies
+        run: yarn install
+      - name: test
+        run: yarn test
+      - name: build package
+        run: yarn build
+      - name: publish package to npm registry
+        run: yarn publish --non-interactive --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
