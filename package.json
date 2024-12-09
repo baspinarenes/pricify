@@ -12,6 +12,9 @@
       "import": "./dist/index.js"
     }
   },
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "dev": "vite",
     "playground": "vite-node ./playgrounds/index.ts",
